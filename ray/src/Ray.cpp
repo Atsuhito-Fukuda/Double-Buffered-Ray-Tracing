@@ -870,7 +870,7 @@ static void GL_LoadFbo(void) {
 
     const Texture texdeflist[TEXTSIZE] = {                              // tex buff defs for depth/index buffs to be attached to fbo frame buffs
         { GL_DEPTH_ATTACHMENT, GL_DEPTH_COMPONENT32F, GL_DEPTH_COMPONENT, GL_FLOAT, "depthbuffer" },
-        { GL_COLOR_ATTACHMENT0, GL_RG16UI, GL_RG_INTEGER, GL_UNSIGNED_SHORT, "indexbuffer" }
+        { GL_COLOR_ATTACHMENT0, GL_RG16F, GL_RG, GL_HALF_FLOAT, "indexbuffer" }
     };
 
 
