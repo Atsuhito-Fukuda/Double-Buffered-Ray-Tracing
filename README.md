@@ -8,7 +8,7 @@ The capturings are determined by testing if the rays to each plane intersection 
 Furthermore, the method also presents constructing complex shapes by subtracting a portion of a shape from another.
 
 <div align="center">
-  <img src="https://github.com/Atsuhito-Fukuda/Double-Buffered-Ray-Tracing/releases/download/v0.1.0/introduction+2.0.png" alt="concise visual summary of DB Ray Tracing" style="width:65%;"> <br>
+  <img src="https://github.com/Atsuhito-Fukuda/Double-Buffered-Ray-Tracing/releases/download/v1.0.0/introduction.png" alt="concise visual summary of DB Ray Tracing" style="width:65%;"> <br>
   <span style="font-size:14px;">
     A concise visual summary of the method's framework. (a) Two rays, facing each other, <br>
     obtaining a shape defined by infinite planes. (b) A rendering of a cube from which <br>
@@ -25,9 +25,9 @@ The results of the calculations appear as Ray Units/Objects drawn on the screen.
 
 ## Documentation
 
-- [Main Article (IEEE, PDF)](リンクをここに) is the main article, which presents the concept, calculations, and advantages/disadvantages of the novel method.
+- [Main Article (preprint, IEEE, PDF)](https://github.com/Atsuhito-Fukuda/Double-Buffered-Ray-Tracing/releases/download/v1.0.0/Double_Buffered_Ray_Tracing.preprint.pdf) is the main (preprint) article, which presents the concept, calculations, and advantages/disadvantages of the novel method.
   
-- [Ray Calculation Workflow (PDF)](https://github.com/Atsuhito-Fukuda/Double-Buffered-Ray-Tracing/releases/download/v0.1.0/RayCalcWorkflow.pdf) presents the computer-based workflow of the ray calculations in the novel method.
+- [Ray Calculation Workflow (PDF)](https://github.com/Atsuhito-Fukuda/Double-Buffered-Ray-Tracing/releases/download/v1.0.0/RayCalcWorkflow.pdf) presents the computer-based workflow of the ray calculations in the novel method.
 
 
 ## Build
@@ -64,9 +64,9 @@ The following necessary third-party libraries and their header files are include
 
 ## Customization
 
-Edit shaders in `./ray/src/sh/` to modify the ray calculations.
+- Edit shaders in `./ray/src/sh/` to modify the ray calculations.
 
-Type, number, parameters of Ray Units/Objects can be edited in the Ray class constructor in `./ray/src/Ray.cpp`.
+- Type, number, parameters of Ray Units/Objects can be edited in the Ray class constructor in `./ray/src/Ray.cpp`.
 
 ## Mouse / Keyboard Controls
 
