@@ -25,7 +25,7 @@ The results of the calculations appear as Ray Units/Objects drawn on the screen.
 
 ## Documentation
 
-- [Main Article (preprint, IEEE, PDF)](https://github.com/Atsuhito-Fukuda/Double-Buffered-Ray-Tracing/releases/download/v1.0.0/Double_Buffered_Ray_Tracing.preprint.pdf) is the main (preprint) article, which presents the concept, calculations, and advantages/disadvantages of the novel method.
+- [Main Article (preprint, IEEE TVCG, PDF)](https://github.com/Atsuhito-Fukuda/Double-Buffered-Ray-Tracing/releases/download/v1.0.0/Double_Buffered_Ray_Tracing.preprint.pdf) is the main (preprint) article, which presents the concept, calculations, and advantages/disadvantages of the novel method.
   
 - [Ray Calculation Workflow (PDF)](https://github.com/Atsuhito-Fukuda/Double-Buffered-Ray-Tracing/releases/download/v1.0.0/RayCalcWorkflow.pdf) presents the computer-based workflow of the ray calculations in the novel method.
 
