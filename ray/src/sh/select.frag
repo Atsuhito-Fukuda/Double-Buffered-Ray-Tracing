@@ -11,15 +11,15 @@
 
 struct Cell {
 	/* This structure contains an actual region, captured from both ray sides. */
-	float depth[2]; uvec2 index[2];										// depth: intersection distance, index: ray unit and plane indices
+	float depth[2]; vec2 index[2];										// depth: intersection distance, index: ray unit and plane indices
 };
 
 
-out uvec2 outindex; 													// output the final ray unit and plane indices for subsequent rendering
+out vec2 outindex;	 													// output the final ray unit and plane indices for subsequent rendering
 
 
 uniform sampler2DArray depthbuffer;										// fbo ray2 depth buffer. stores ray distances to planes from the ray2 stage
-uniform usampler2DArray indexbuffer;									// fbo ray2 index buffer. stores ray unit and plane indices from the ray2 stage
+uniform sampler2DArray indexbuffer;										// fbo ray2 index buffer. stores ray unit and plane indices from the ray2 stage
 
 
 void main() { 
@@ -28,7 +28,7 @@ void main() {
 																		// UNITSEGSIZE: number of ray unit segments contained in an ray object segment of the fbo ray2 buffer
 	const int PRMCELL = 0;												// index of the ray primary unit cell
 	
-	const Cell defcell = Cell(float[](1.0f, 0.0f), uvec2[](uvec2(-1, -1), uvec2(-1, -1)));		// initial val of the cell
+	const Cell defcell = Cell(float[](1.0f, 0.0f), vec2[](vec2(-1, -1), vec2(-1, -1)));		// initial val of the cell
 
 
 	// (-- layer 0: capture test --) test if the two rays have captured actual regions of the ray units
@@ -40,7 +40,7 @@ void main() {
 		bool D = depth[0] + depth[1] < 1.0f;
 		
 		for (int n = 0; n < RAYSIDELEN; ++n) { cell[i].depth[n] = int(D) * depth[n] + (1 - int(D)) * defcell.depth[n]; }
-		for (int n = 0; n < RAYSIDELEN; ++n) { cell[i].index[n] = uint(D) * texelFetch(indexbuffer, ivec3(gl_FragCoord.xy, i * RAYSIDELEN + n), 0).xy + (uint(1) - uint(D)) * defcell.index[n]; }
+		for (int n = 0; n < RAYSIDELEN; ++n) { cell[i].index[n] = int(D) * texelFetch(indexbuffer, ivec3(gl_FragCoord.xy, i * RAYSIDELEN + n), 0).xy + (1 - int(D)) * defcell.index[n]; }
 	
 	}
 
@@ -63,7 +63,7 @@ void main() {
 			float depth[RAYSIDELEN]; for (int m = 0; m < RAYSIDELEN; ++m){ depth[m] = int(Dm[m]) * actcell.depth[m] + (1 - int(Dm[m])) * subcell.depth[m]; }
 
 			for (int m = 0; m < RAYSIDELEN; ++m){ tmpcell[tmpptr].depth[m] = depth[m]; }
-			for (int m = 0; m < RAYSIDELEN; ++m){ tmpcell[tmpptr].index[m] = uint(Dm[m]) * actcell.index[m] + (uint(1) - uint(Dm[m])) * subcell.index[m]; }
+			for (int m = 0; m < RAYSIDELEN; ++m){ tmpcell[tmpptr].index[m] = int(Dm[m]) * actcell.index[m] + (1 - int(Dm[m])) * subcell.index[m]; }
 				
 			bool D = depth[0] + depth[1] < 1.0f;						// test if an actual region is captured
 
@@ -74,7 +74,7 @@ void main() {
 		bool D = tmpptr > 0;											// move the closest result from the re-captured regions
 
 		for (int n = 0; n < RAYSIDELEN; ++n){ actcell.depth[n] = int(D) * tmpcell[0].depth[n] + (1 - int(D)) * defcell.depth[n]; }
-		for (int n = 0; n < RAYSIDELEN; ++n){ actcell.index[n] = uint(D) * tmpcell[0].index[n] + (uint(1) - uint(D)) * defcell.index[n]; }
+		for (int n = 0; n < RAYSIDELEN; ++n){ actcell.index[n] = int(D) * tmpcell[0].index[n] + (1 - int(D)) * defcell.index[n]; }
 
 	}
 	

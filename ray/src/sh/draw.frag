@@ -29,7 +29,7 @@ layout(std140, row_major) uniform UboUnitBuffer { Unit unit[20]; };		// ubo unit
 layout(std140) uniform UboPlaneBuffer { Plane mdpl[200]; };				// ubo plane buffer. stores ray unit plane data
 
 uniform sampler2DArray depthbuffer;										// fbo selection depth buffer. stores ray distances to planes from the selection stage
-uniform usampler2DArray indexbuffer;									// fbo selection index buffer. stores ray unit and plane indices from the selection stage
+uniform sampler2DArray indexbuffer;										// fbo selection index buffer. stores ray unit and plane indices from the selection stage
 
 uniform sampler2D raybuffer[RAYBUFFSIZE];								// ray pos and dir buffers
 uniform sampler2D img;													// image texture
@@ -57,7 +57,7 @@ void main() {
 
 		Plane pl; vec2 texscale; {										// pl: plane transformed into ray space, texscale: scale factor of image tex
 		
-			uvec2 index = texelFetch(indexbuffer, ivec3(gl_FragCoord.xy, 0), 0).xy;
+			uvec2 index = uvec2(texelFetch(indexbuffer, ivec3(gl_FragCoord.xy, 0), 0).xy);
 
 			for (int i = 0; i < PLELMSIZE; ++i) { pl.vec[i] = viewmat4 * unit[index[UNITINDEX]].modelmat4 * mdpl[index[PLINDEX]].vec[i]; }	
 			texscale = unit[index[UNITINDEX]].texscale;

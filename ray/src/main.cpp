@@ -113,6 +113,8 @@ static int Initialize(void) {
 
     if (!glfwInit()) { printf("Error: GLFW Init failure.\n"); return !SUCCESS; }
 
+    glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GL_FALSE);
+    
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);                      // MacOS supports up to OpenGL 4.1 and the code is implemented accordingly
 
@@ -160,7 +162,7 @@ static int Update(double time) {
     double difftime = (time - prevtime) * 1000.0;
 
     char str[6] = "---"; if (difftime < MAXDISPTIME) snprintf(str, sizeof(str), "%05.1lf", difftime);
-    printf("\r%s", str);                                                // output elapsed time (vert sync is ON by default)
+    printf("\r%s", str); fflush(stdout);                                // output elapsed time (vert sync is ON by default)
     
 
     prevtime = time;

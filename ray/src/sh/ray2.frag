@@ -13,7 +13,7 @@ struct Plane{
 };
 
 
-out uvec2 outindex;														// output the concerned ray unit and plane indices
+out vec2 outindex;														// output the concerned ray unit and plane indices
 
 
 flat in uvec2 index;													// input the concerned ray unit and plane indices
